@@ -1,0 +1,21 @@
+{
+  "name": "changeloger",
+  "version": "0.0.1",
+  "private": false,
+  "description": "free changelog",
+  "license": "MIT",
+  "author": "alqmc",
+  "files": [
+    "index.js",
+    "template",
+    "README.md"
+  ],
+  "bin": {
+    "template-cli": "index.js"
+  },
+  "dependencies": {
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2"
+  }
+}
