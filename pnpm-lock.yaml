@@ -13,7 +13,6 @@ specifiers:
   '@types/node': ^17.0.21
   '@types/prompts': ^2.0.14
   commitizen: ^4.1.2
-  compare-func: ^2.0.0
   gulp: ^4.0.2
   husky: ^8.0.1
   kolorist: ^1.5.1
@@ -46,7 +45,6 @@ devDependencies:
   '@types/node': registry.npmmirror.com/@types/node/17.0.45
   '@types/prompts': registry.npmmirror.com/@types/prompts/2.0.14
   commitizen: registry.npmmirror.com/commitizen/4.2.4
-  compare-func: registry.npmmirror.com/compare-func/2.0.0
   gulp: registry.npmmirror.com/gulp/4.0.2
   husky: registry.npmmirror.com/husky/8.0.1
   lint-staged: registry.npmmirror.com/lint-staged/10.5.4
