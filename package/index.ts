@@ -1,5 +1,6 @@
 import minimist from 'minimist';
-import pkg from '../package/package.json';
+import pkg from './package.json';
+import { generatorLog } from './generator';
 const init = async () => {
   const argv = minimist(process.argv.slice(2), {
     string: ['_'],
@@ -11,6 +12,7 @@ const init = async () => {
     console.log(`v${pkg.version}`);
     return;
   }
+  await generatorLog();
 };
 
 init().catch((e) => {

@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { copyFile } from 'fs/promises';
+import { copy, copyFile } from '@alqmc/build-utils';
 import { enterPath, outputPath, rootPath } from './utils/path';
 export const copyFiles = async () => {
   Promise.all([
@@ -8,5 +8,7 @@ export const copyFiles = async () => {
       resolve(outputPath, 'package.json')
     ),
     copyFile(resolve(rootPath, 'README.md'), resolve(outputPath, 'README.md')),
+    copy(resolve(enterPath, 'template'), resolve(outputPath, 'template')),
+    copy(resolve(rootPath, 'assets'), resolve(outputPath, 'assets')),
   ]);
 };

@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100px" src="./package/logo.svg">
+  <img width="100px" src="./asstes/logo.svg">
 </p>
 
 <p align="center">
