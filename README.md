@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100px" src="./asstes/logo.svg">
+  <img width="100px" src="./assets/logo.svg">
 </p>
 
 <p align="center">
@@ -36,6 +36,8 @@
 ```
 pnpm add changeloger -g
 ```
+
+### Thanks [changelogen](https://github.com/unjs/changelogen) !!!
 
 ### License
 
