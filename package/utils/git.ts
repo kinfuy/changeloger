@@ -7,7 +7,7 @@ export interface GitCommitAuthor {
   email: string;
 }
 export interface Reference {
-  type: 'hash' | 'issue' | 'pull-request';
+  type: 'hash' | 'issue' | 'pull';
   value: string;
 }
 export interface TagInfo extends Record<string, string> {
@@ -65,7 +65,7 @@ const IssueRE = /(#[0-9]+)/gm;
 
 export const parseGitCommit = (commit: RawGitCommit, config: any) => {
   const match = commit.message.match(ConventionalCommitRegex);
-  const type = match?.groups!.type || 'chore';
+  const type = match?.groups!.type || 'Other';
   let scope = match?.groups?.scope || '';
   scope = config.scopeMap[scope] || scope;
 
@@ -78,7 +78,7 @@ export const parseGitCommit = (commit: RawGitCommit, config: any) => {
 
   if (description) {
     Array.from(description.matchAll(PullRequestRE)).forEach((m) => {
-      references.push({ type: 'pull-request', value: m[1] });
+      references.push({ type: 'pull', value: m[1] });
     });
     Array.from(description.matchAll(IssueRE)).forEach((m) => {
       if (!references.find((i) => i.value === m[1])) {
@@ -175,9 +175,13 @@ export const getGitRepo = async (key: string) => {
 
 export const getDefaultGitRepo = async () => {
   const repos = ['origin', 'github', 'gitee'];
-  const tag = repos.map(async (x) => {
-    const repo = await getGitRepo(x);
-    return repo;
-  });
-  return tag[0];
+  for (let i = 0; i < repos.length; i++) {
+    try {
+      const repo = await getGitRepo(repos[i]);
+      if (/^http/.test(repo)) {
+        return repo.slice(0, repo.lastIndexOf('.'));
+      }
+    } catch (error) {}
+  }
+  return undefined;
 };

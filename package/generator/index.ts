@@ -14,16 +14,22 @@ export const generatorLog = async () => {
   const config = await loadChangelogConfig();
   const tagList = await getGitTagList();
   const markdowns = [];
-  const repo = await getDefaultGitRepo();
+
   if (tagList.length > 0) {
     for (let tag = 0; tag < tagList.length; tag++) {
-      config.from = tag + 1 < tagList.length ? tagList[tag + 1].tag : undefined;
-      config.to = tagList[tag].tag;
-      const commits = await getGitCommits(config.from, config.to);
-      markdowns.push('', `# ${tagList[tag].tag}(${tagList[tag].date})\n`);
-      const rows = parseCommits(commits, config);
-      const markdown = generateBeautifyMd(rows, config);
-      if (markdown) markdowns.push(markdown);
+      const from = tag + 1 < tagList.length ? tagList[tag + 1].tag : undefined;
+      const to = tagList[tag].tag;
+      const commits = await getGitCommits(from, to);
+      if (commits) {
+        const rows = parseCommits(commits, config);
+        const markdown = generateBeautifyMd(
+          rows,
+          config,
+          tagList[tag + 1],
+          tagList[tag]
+        );
+        if (markdown) markdowns.push(markdown);
+      }
     }
   } else {
     const commits = await getGitCommits();
@@ -33,7 +39,7 @@ export const generatorLog = async () => {
   }
 
   await writeFile(
-    resolve(process.cwd(), 'GLOBALCHANGE.md'),
+    resolve(process.cwd(), config.output),
     markdowns.join('\n').trim()
   );
 };

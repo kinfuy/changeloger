@@ -1,38 +1,47 @@
 import { resolve } from 'path';
-import { getCurrentGitRef, getLastGitTag } from './utils/git';
-import { deepMerge } from './utils/deepMerge';
+import { getDefaultGitRepo } from './utils/git';
 
 export interface MarkdownTheme {
-  name: 'default' | 'colorful' | 'custom';
+  name: 'default' | 'simple' | 'custom';
+  types: Record<string, { title: string }>;
 }
 export interface ChangelogConfig extends Record<string, any> {
-  types?: Record<string, { title: string }>;
   scopeMap?: Record<string, string>;
-  from?: string;
-  to?: string;
-  theme?: MarkdownTheme;
+  theme: MarkdownTheme;
+  output: 'CHANGELOG.md';
+  repository?: string;
   include?: string[];
   exclude?: string[];
 }
 
-export const ConfigDefaults: ChangelogConfig = {
-  types: {
-    feat: { title: '✨ Features | 新功能' },
-    perf: { title: '⚡ Performance Improvements | 性能优化' },
-    fix: { title: '🐛 Bug Fixes | Bug 修复' },
-    refactor: { title: '♻ Code Refactoring | 代码重构' },
-    examples: { title: '🏀 Examples' },
-    docs: { title: '📝 Documentation | 文档' },
-    chore: { title: '🎫 Chores | 其他更新' },
-    build: { title: '👷‍ Build System | 构建' },
-    test: { title: '✅ Tests | 测试' },
-    types: { title: '🌊 Types | 类型' },
-    style: { title: '💄 Styles | 风格' },
-    ci: { title: '🔧 Continuous Integration | CI 配置' },
-    reverts: { title: '⏪ Reverts | 回退' },
+const theme: Record<string, MarkdownTheme> = {
+  default: {
+    name: 'default',
+    types: {
+      feat: { title: '✨ Features | 新功能' },
+      perf: { title: '⚡ Performance Improvements | 性能优化' },
+      fix: { title: '🐛 Bug Fixes | Bug 修复' },
+      refactor: { title: '♻ Code Refactoring | 代码重构' },
+      docs: { title: '📝 Documentation | 文档' },
+      chore: { title: '🎫 Chores | 变更构建流程或辅助工具' },
+      build: { title: '👷‍ Build System | 构建' },
+      test: { title: '✅ Tests | 测试' },
+      types: { title: '🌊 Types | 类型' },
+      style: { title: '💄 Styles | 风格' },
+      reverts: { title: '⏪ Reverts | 回退' },
+      deps: { title: '🥦 Dependencies | 升级依赖' },
+      ci: { title: '🔧 Continuous Integration | CI 配置' },
+      other: { title: '👏 Other | 其他更新' },
+    },
   },
-  from: '',
-  to: '',
+};
+
+export const ConfigDefaults: ChangelogConfig = {
+  theme: {
+    name: 'default',
+    types: theme.default.types,
+  },
+  output: 'CHANGELOG.md',
   scopeMap: {},
 };
 
@@ -40,14 +49,7 @@ export async function loadChangelogConfig(): Promise<ChangelogConfig> {
   const test = await import(
     resolve(process.cwd(), 'changeloger.config.js')
   ).catch(() => {});
-  const config = test ? deepMerge(ConfigDefaults, test) : ConfigDefaults;
-
-  if (!config.from) {
-    config.from = await getLastGitTag();
-  }
-
-  if (!config.to) {
-    config.to = await getCurrentGitRef();
-  }
+  const config = Object.assign(ConfigDefaults, test);
+  if (!config.repository) config.repository = await getDefaultGitRepo();
   return config;
 }
