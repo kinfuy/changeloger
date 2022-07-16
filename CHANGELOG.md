@@ -1,4 +1,18 @@
-# [v0.0.4](https://github.com/alqmc/changeloger/compare/v0.0.4)(2022-07-14)
+# [v0.0.5](https://github.com/alqmc/changeloger/compare/v0.0.4...v0.0.5)（2022-07-16）
+
+
+### ✨ Features | 新功能
+
+  - Feat: 新增主题 ([c72df04](https://github.com/alqmc/changeloger/commit/c72df04))
+
+### 🐛 Bug Fixes | Bug 修复
+
+  - Fix: detail ([c6b7343](https://github.com/alqmc/changeloger/commit/c6b7343))
+
+### ❤️  Contributors
+
+- Alqmc
+# [v0.0.4](https://github.com/alqmc/changeloger/compare/v0.0.4)（2022-07-14）
 
 
 ### ✨ Features | 新功能

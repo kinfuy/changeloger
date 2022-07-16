@@ -12,12 +12,12 @@ export const generateBeautifyMd = (
   const markdown: string[] = [];
   const breakingChanges = [];
 
+  const compare = `${from?.tag ? `${from?.tag}...` : ''}${to?.tag}`;
+
   if (to && repository) {
     markdown.push(
       '',
-      `# [${to.tag}](${repository}/compare/${
-        from?.tag ? `${from?.tag}...` : to.tag
-      })(${to.date})\n`
+      `# [${to.tag}](${repository}/compare/${compare})（${to.date}）\n`
     );
   } else if (to) {
     markdown.push('', `# ${to.tag}(${to.date})\n`);
