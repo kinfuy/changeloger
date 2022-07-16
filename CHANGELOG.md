@@ -1,4 +1,11 @@
-# [v0.0.4](https://github.com/alqmc/changeloger/compare/v0.0.4)(2022-07-14)
+### 🐛 Bug Fixes | Bug 修复
+
+  - Fix: detail ([c6b7343](https://github.com/alqmc/changeloger/commit/c6b7343))
+
+### ❤️  Contributors
+
+- Alqmc
+# [v0.0.4](https://github.com/alqmc/changeloger/compare/v0.0.4)（2022-07-14）
 
 
 ### ✨ Features | 新功能

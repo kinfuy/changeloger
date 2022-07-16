@@ -6,9 +6,11 @@ export interface MarkdownTheme {
   types: Record<string, { title: string }>;
 }
 export interface ChangelogConfig extends Record<string, any> {
-  scopeMap?: Record<string, string>;
   theme: MarkdownTheme;
-  output: 'CHANGELOG.md';
+  output: string;
+  shouAuthor: boolean;
+  showNotMatchComiit: boolean;
+  scopeMap: Record<string, string>;
   repository?: string;
   include?: string[];
   exclude?: string[];
@@ -41,6 +43,8 @@ export const ConfigDefaults: ChangelogConfig = {
     name: 'default',
     types: theme.default.types,
   },
+  shouAuthor: true,
+  showNotMatchComiit: true,
   output: 'CHANGELOG.md',
   scopeMap: {},
 };
