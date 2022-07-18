@@ -1,5 +1,5 @@
 import { getGitCommits, parseCommits } from '../utils/git';
-import { generateBeautifyMd } from '../utils/markdown';
+import { generateDefaultMd } from '../utils/markdown';
 import type { ChangelogConfig } from '../changeloger.config';
 import type { TagInfo } from '../utils/git';
 
@@ -15,7 +15,7 @@ export const buildDefaultTheme = async (
       const commits = await getGitCommits(from, to);
       if (commits) {
         const rows = parseCommits(commits, config);
-        const markdown = generateBeautifyMd(
+        const markdown = generateDefaultMd(
           rows,
           config,
           tagList[tag + 1],
@@ -27,7 +27,7 @@ export const buildDefaultTheme = async (
   } else {
     const commits = await getGitCommits();
     const rows = parseCommits(commits, config);
-    const markdown = generateBeautifyMd(rows, config);
+    const markdown = generateDefaultMd(rows, config);
     if (markdown) markdowns.push(markdown);
   }
   return markdowns;

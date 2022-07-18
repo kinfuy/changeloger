@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { loadChangelogConfig } from '../changeloger.config';
 import { getGitTagList } from '../utils/git';
 import { buildDefaultTheme } from './defaultTheme';
+import { buildSimpleTheme } from './simpleTheme';
 
 export const generatorLog = async () => {
   const config = await loadChangelogConfig();
@@ -11,6 +12,10 @@ export const generatorLog = async () => {
   if (config.theme.name === 'default') {
     const defaultMd = await buildDefaultTheme(tagList, config);
     markdowns = [...defaultMd];
+  }
+  if (config.theme.name === 'simple') {
+    const SimpleMd = await buildSimpleTheme(tagList, config);
+    markdowns = [...SimpleMd];
   }
 
   await writeFile(

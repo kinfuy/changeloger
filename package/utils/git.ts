@@ -1,6 +1,7 @@
 // https://github.com/unjs/changelogen
 
 import { execCommand } from './shell';
+import type { ChangelogConfig } from '../changeloger.config';
 
 export interface GitCommitAuthor {
   name: string;
@@ -63,9 +64,16 @@ const CoAuthoredByRegex = /Co-authored-by:\s*(?<name>.+)(<(?<email>.+)>)/gim;
 const PullRequestRE = /\([a-z ]*(#[0-9]+)\s*\)/gm;
 const IssueRE = /(#[0-9]+)/gm;
 
-export const parseGitCommit = (commit: RawGitCommit, config: any) => {
+export const parseGitCommit = (
+  commit: RawGitCommit,
+  config: ChangelogConfig
+) => {
   const match = commit.message.match(ConventionalCommitRegex);
-  const type = match?.groups!.type || 'Other';
+  let type = match?.groups!.type;
+  if (config.showNotMatchComiit && !type) {
+    type = 'other';
+  }
+
   let scope = match?.groups?.scope || '';
   scope = config.scopeMap[scope] || scope;
 

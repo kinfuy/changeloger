@@ -1,7 +1,7 @@
 import type { ChangelogConfig } from '../changeloger.config';
 import type { GitCommit, Reference, TagInfo } from './git';
 
-export const generateBeautifyMd = (
+export const generateDefaultMd = (
   commits: GitCommit[],
   config: ChangelogConfig,
   from?: TagInfo,
@@ -46,7 +46,7 @@ export const generateBeautifyMd = (
   );
   authors = uniq(authors).sort();
 
-  if (authors.length) {
+  if (authors.length && config.showContributors) {
     markdown.push(
       '',
       '### ' + '❤️  Contributors',
@@ -55,6 +55,18 @@ export const generateBeautifyMd = (
     );
   }
   return markdown.join('\n').trim();
+};
+
+export const generateSimpleMd = (
+  commits: GitCommit[],
+  config: ChangelogConfig,
+  from?: TagInfo,
+  to?: TagInfo
+) => {
+  const { repository } = config;
+  const markdown: string[] = [];
+  const breakingChanges = [];
+  const compare = `${from?.tag ? `${from?.tag}...` : ''}${to?.tag}`;
 };
 
 function groupBy(items: any[], key: string) {
