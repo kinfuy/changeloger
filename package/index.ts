@@ -12,6 +12,7 @@ const init = async () => {
     console.log(`v${pkg.version}`);
     return;
   }
+
   await generatorLog();
 };
 

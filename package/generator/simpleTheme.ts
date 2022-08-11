@@ -1,9 +1,9 @@
 import { getGitCommits, parseCommits } from '../utils/git';
-import { generateDefaultMd } from '../utils/markdown';
-import type { ChangelogConfig } from '../changeloger.config';
+import { generateSimpleMd } from '../utils/markdown';
 import type { TagInfo } from '../utils/git';
+import type { ChangelogConfig } from '../changeloger.config';
 
-export const buildDefaultTheme = async (
+export const buildSimpleTheme = async (
   tagList: TagInfo[],
   config: ChangelogConfig
 ): Promise<string[]> => {
@@ -15,7 +15,7 @@ export const buildDefaultTheme = async (
       const commits = await getGitCommits(from, to);
       if (commits) {
         const rows = parseCommits(commits, config);
-        const markdown = generateDefaultMd(
+        const markdown = generateSimpleMd(
           rows,
           config,
           tagList[tag + 1],
@@ -27,7 +27,7 @@ export const buildDefaultTheme = async (
   } else {
     const commits = await getGitCommits();
     const rows = parseCommits(commits, config);
-    const markdown = generateDefaultMd(rows, config);
+    const markdown = generateSimpleMd(rows, config);
     if (markdown) markdowns.push(markdown);
   }
   return markdowns;

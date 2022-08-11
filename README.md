@@ -25,11 +25,13 @@
 
 ### Features
 
-- 丰富的日志模板，支持自定义
+- 一键生成 CHANGELOG.md
+
+- 基于 Commits log 生成
 
 - 自定义过滤规则，过滤无效 log
 
-- 基于 Commits log 生成
+- 丰富的日志模板，支持自定义
 
 ### Getting Started
 
@@ -72,10 +74,20 @@ module.exports = {
       other: { title: '👏 Other | 其他更新' },
     },
   },
-  include: [],
-  exclude: [],
+  showContributors: false,
+  showNotMatchComiit: true,
 };
 ```
+
+## 支持主题
+
+### defalut 主题
+
+![defalut 主题](/assets/defalut.png)
+
+### simple 主题
+
+![defalut 主题](/assets/simple.png)
 
 ### Thanks [changelogen](https://github.com/unjs/changelogen) !!!
 
