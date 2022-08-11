@@ -6,6 +6,7 @@ import { buildDefaultTheme } from './defaultTheme';
 import { buildSimpleTheme } from './simpleTheme';
 
 export const generatorLog = async () => {
+  debugger;
   const config = await loadChangelogConfig();
   const tagList = await getGitTagList();
   let markdowns: string[] = [];

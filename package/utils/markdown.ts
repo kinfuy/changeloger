@@ -66,7 +66,50 @@ export const generateSimpleMd = (
   const { repository } = config;
   const markdown: string[] = [];
   const breakingChanges = [];
+  const typeGroups = groupBy(commits, 'type');
   const compare = `${from?.tag ? `${from?.tag}...` : ''}${to?.tag}`;
+  if (to && repository) {
+    markdown.push(
+      '',
+      `# [${to.tag}](${repository}/compare/${compare})（${to.date}）\n`
+    );
+  } else if (to) {
+    markdown.push('', `# ${to.tag}(${to.date})\n`);
+  }
+
+  markdown.push('', "## What's Changed");
+
+  for (const type in config.theme.types) {
+    const group = typeGroups[type];
+    if (!group || !group.length) {
+      continue;
+    }
+
+    for (const commit of group.reverse()) {
+      const line = formatCommit(commit, repository);
+      markdown.push(line);
+      if (commit.isBreaking) {
+        breakingChanges.push(line);
+      }
+    }
+  }
+  if (breakingChanges.length) {
+    markdown.push('', '#### ⚠️  Breaking Changes', '', ...breakingChanges);
+  }
+  let authors = commits.flatMap((commit) =>
+    commit.authors.map((author) => formatName(author.name))
+  );
+  authors = uniq(authors).sort();
+
+  if (authors.length && config.showContributors) {
+    markdown.push(
+      '',
+      '### ' + '❤️  Contributors',
+      '',
+      ...authors.map((name) => `- ${name}`)
+    );
+  }
+  return markdown.join('\n').trim();
 };
 
 function groupBy(items: any[], key: string) {
