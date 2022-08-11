@@ -77,7 +77,8 @@ export const generateSimpleMd = (
     markdown.push('', `# ${to.tag}(${to.date})\n`);
   }
 
-  markdown.push('', "## What's Changed");
+  if (Object.keys(typeGroups).length > 0)
+    markdown.push('', "## What's Changed");
 
   for (const type in config.theme.types) {
     const group = typeGroups[type];
