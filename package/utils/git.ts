@@ -80,7 +80,9 @@ export const parseGitCommit = (
   const isBreaking = Boolean(match?.groups?.breaking);
 
   let description =
-    match?.groups?.description || type === 'chore' ? commit.message : '';
+    match?.groups?.description || type === 'chore' || config.showNotMatchComiit
+      ? commit.message
+      : '';
 
   const references: Reference[] = [];
 
