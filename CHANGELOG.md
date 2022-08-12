@@ -1,6 +1,7 @@
 ### 🐛 Bug Fixes | Bug 修复
 
   - Fix: simple ([b23a4ae](https://github.com/alqmc/changeloger/commit/b23a4ae))
+  - Fix: showNotMatchComiit ([ca09b36](https://github.com/alqmc/changeloger/commit/ca09b36))
 # [v0.0.7](https://github.com/alqmc/changeloger/compare/v0.0.4...v0.0.7)（2022-08-11）
 
 
