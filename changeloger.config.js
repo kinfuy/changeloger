@@ -1,4 +1,5 @@
 module.exports = {
+  theme: 'simple',
   types: {
     feat: { title: 'Features | 新功能' },
     fix: { title: 'Bug Fixes | Bug 修复' },
