@@ -6,14 +6,14 @@ const init = async () => {
     string: ['_'],
     alias: {
       version: ['v', 'version'],
+      config: ['c'],
     },
   });
   if (argv.version) {
     console.log(`v${pkg.version}`);
     return;
   }
-
-  await generatorLog();
+  await generatorLog(argv.config);
 };
 
 init().catch((e) => {

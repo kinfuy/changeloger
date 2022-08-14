@@ -1,6 +1,7 @@
 // https://github.com/unjs/changelogen
 
 import { execCommand } from './shell';
+import { transformSpecialString } from './transform';
 import type { ChangelogConfig } from '../changeloger.config';
 
 export interface GitCommitAuthor {
@@ -113,7 +114,7 @@ export const parseGitCommit = (
   return {
     ...commit,
     authors,
-    description,
+    description: transformSpecialString(description),
     type,
     scope,
     references,

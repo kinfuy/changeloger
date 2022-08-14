@@ -1,6 +1,6 @@
 {
   "name": "changeloger",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "free changelog",
   "author": "alqmc",
   "scripts": {
@@ -10,6 +10,7 @@
     "push": "git push gitee master && git push github master",
     "update:version": "sucrase-node build/utils/version.ts",
     "lint": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx \"src/**/*.{jsx,js,ts,tsx}\" ",
+    "log": "changeloger -c ./changeloger.config.js",
     "prepare": "husky install"
   },
   "license": "MIT",

@@ -23,13 +23,13 @@ export const generateDefaultMd = (
     markdown.push('', `# ${to.tag}(${to.date})\n`);
   }
 
-  for (const type in config.theme.types) {
+  for (const type in config.types) {
     const group = typeGroups[type];
     if (!group || !group.length) {
       continue;
     }
 
-    markdown.push('', `### ${config.theme.types[type].title}`, '');
+    markdown.push('', `### ${config.types[type].title}`, '');
     for (const commit of group.reverse()) {
       const line = formatCommit(commit, repository);
       markdown.push(line);
@@ -80,7 +80,7 @@ export const generateSimpleMd = (
   if (Object.keys(typeGroups).length > 0)
     markdown.push('', "## What's Changed");
 
-  for (const type in config.theme.types) {
+  for (const type in config.types) {
     const group = typeGroups[type];
     if (!group || !group.length) {
       continue;
