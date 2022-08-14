@@ -5,15 +5,15 @@ import { getGitTagList } from '../utils/git';
 import { buildDefaultTheme } from './defaultTheme';
 import { buildSimpleTheme } from './simpleTheme';
 
-export const generatorLog = async () => {
-  const config = await loadChangelogConfig();
+export const generatorLog = async (configPath?: string) => {
+  const config = await loadChangelogConfig(configPath);
   const tagList = await getGitTagList();
   let markdowns: string[] = [];
-  if (config.theme.name === 'default') {
+  if (config.theme === 'default') {
     const defaultMd = await buildDefaultTheme(tagList, config);
     markdowns = [...defaultMd];
   }
-  if (config.theme.name === 'simple') {
+  if (config.theme === 'simple') {
     const SimpleMd = await buildSimpleTheme(tagList, config);
     markdowns = [...SimpleMd];
   }

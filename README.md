@@ -33,6 +33,8 @@
 
 - 丰富的日志模板，支持自定义
 
+- monorepo 支持
+
 ### Getting Started
 
 ```
