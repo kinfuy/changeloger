@@ -9,6 +9,7 @@ module.exports = {
   },
   showContributors: false,
   showNotMatchComiit: true,
+  tagSort: 'date',
 };
 // module.exports = {
 //   theme: 'default',

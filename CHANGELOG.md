@@ -1,3 +1,6 @@
+# [v0.1.0](https://github.com/alqmc/changeloger/compare/v0.0.9...v0.1.0)（2022-08-14）
+
+
 ## What's Changed
   - Fix: changeloge config changed ([160e9a5](https://github.com/alqmc/changeloger/commit/160e9a5))
 # [v0.0.9](https://github.com/alqmc/changeloger/compare/v0.0.7...v0.0.9)（2022-08-12）

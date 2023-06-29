@@ -15,6 +15,7 @@ export interface ChangelogConfig extends MarkdownTheme {
   monorepo?: boolean;
   include?: string[];
   exclude?: string[];
+  tagSort?: 'date' | 'version';
 }
 
 const theme: MarkdownTheme = {

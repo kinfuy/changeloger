@@ -8,6 +8,12 @@ import { buildSimpleTheme } from './simpleTheme';
 export const generatorLog = async (configPath?: string) => {
   const config = await loadChangelogConfig(configPath);
   const tagList = await getGitTagList();
+  if (config.tagSort === 'date') {
+    tagList.sort((v1, v2) => {
+      return new Date(v2.date).getTime() - new Date(v1.date).getTime();
+    });
+  }
+
   let markdowns: string[] = [];
   if (config.theme === 'default') {
     const defaultMd = await buildDefaultTheme(tagList, config);
