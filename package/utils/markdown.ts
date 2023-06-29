@@ -23,6 +23,10 @@ export const generateDefaultMd = (
     markdown.push('', `# ${to.tag}(${to.date})\n`);
   }
 
+  const isOutput = Object.keys(config.types).some((type) =>
+    Object.keys(typeGroups).includes(type)
+  );
+
   for (const type in config.types) {
     const group = typeGroups[type];
     if (!group || !group.length) {
@@ -46,7 +50,7 @@ export const generateDefaultMd = (
   );
   authors = uniq(authors).sort();
 
-  if (authors.length && config.showContributors) {
+  if (authors.length && config.showContributors && isOutput) {
     markdown.push(
       '',
       '### ' + '❤️  Contributors',
@@ -77,7 +81,10 @@ export const generateSimpleMd = (
     markdown.push('', `# ${to.tag}(${to.date})\n`);
   }
 
-  if (Object.keys(typeGroups).length > 0)
+  const isOutput = Object.keys(config.types).some((type) =>
+    Object.keys(typeGroups).includes(type)
+  );
+  if (Object.keys(typeGroups).length > 0 && isOutput)
     markdown.push('', "## What's Changed");
 
   for (const type in config.types) {
@@ -102,7 +109,7 @@ export const generateSimpleMd = (
   );
   authors = uniq(authors).sort();
 
-  if (authors.length && config.showContributors) {
+  if (authors.length && config.showContributors && isOutput) {
     markdown.push(
       '',
       '### ' + '❤️  Contributors',

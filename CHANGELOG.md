@@ -1,3 +1,8 @@
+# [v0.1.1](https://github.com/alqmc/changeloger/compare/v0.1.0...v0.1.1)（2023-06-29）
+
+
+## What's Changed
+  - Feat: support tagsort by date ([47602d6](https://github.com/alqmc/changeloger/commit/47602d6))
 # [v0.1.0](https://github.com/alqmc/changeloger/compare/v0.0.9...v0.1.0)（2022-08-14）
 
 
